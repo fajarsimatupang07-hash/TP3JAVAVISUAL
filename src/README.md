@@ -67,3 +67,37 @@ javavisual-tp5-[253303621268]/
 
 ### 4. Link Google Docs Analisis GUI & MVC (Bagian D)
 * [Link Google Docs TP8 Analisis GUI & MVC](https://docs.google.com/document/d/1pAwStmnKpCy0FHq3qnMg_73EXeotQkbfwwg4EJBbzys/edit?usp=sharing)
+
+## TP10 — Character Manager Sprint #4 (Theming & Properti Komponen)
+
+### 1. Screenshot Tampilan Aplikasi
+*(Tambahkan dua screenshot di bawah ini untuk membuktikan perubahan tampilan)*
+
+* **Sebelum (v0.3 - TP8):**  
+  ![Screenshot Sebelum (v0.3)]("C:\Users\TUF GAMING\OneDrive\Gambar\Screenshots\image-1.png.png")
+
+* **Sesudah (v0.4 - TP10):**  
+  ![Screenshot Sesudah (v0.4)]("C:\Users\TUF GAMING\OneDrive\Gambar\Screenshots\image-2.png.png")
+
+---
+
+### 2. Mengapa Warna Disimpan di `AppTheme` dan Bukan di Class `Character`?
+Pengaturan warna dan aspek visual disimpan di dalam class `AppTheme` (layer View) untuk menerapkan prinsip **Separation of Concerns** dan menjaga arsitektur **MVC**:
+1. **Model Terisolasi:** Class `Character` (Model) bertugas murni mengelola data bisnis (seperti nama, role, level, HP, dan Mana) tanpa perlu tahu bagaimana data tersebut akan digambar di layar.
+2. **Fleksibilitas & Reuse:** Jika aplikasi kelak ingin diubah ke tema lain (misalnya Light Mode / Dark Mode) atau di-porting ke platform lain (seperti Web atau Android), kode di Model tidak perlu diubah sama sekali.
+3. **Mencegah High Coupling:** Menyimpan objek `Color` milik Java Swing di dalam `Character` akan membuat Model terikat erat dengan library GUI Swing.
+
+---
+
+### 3. Daftar Properti Tambahan yang Dipilih & Alasannya
+1. **Tooltip (`card.setToolTipText(...)`):**
+   * **Fungsi:** Menampilkan informasi detail berupa statistik *Hit Points* (HP) dan *Attack Power* (ATK) saat kursor mouse diarahkan ke kartu karakter.
+   * **Alasan:** Memberikan informasi tambahan secara interaktif kepada pengguna tanpa memenuhi ruang antarmuka utama.
+2. **Status Non-Aktif (`card.setEnabled(false)`):**
+   * **Fungsi:** Mengunci dan menonaktifkan tampilan kartu karakter yang masih berada di **Level 1** (misalnya karakter baru / pemula).
+   * **Alasan:** Memberikan umpan balik visual bahwa karakter level 1 masih terikons/belum siap digunakan dalam pertarungan.
+
+---
+
+### 4. Link Google Docs Analisis Properti & MVC (Bagian D)
+* [Link Google Docs TP10 Analisis Properti & MVC](https://docs.google.com/document/d/1jwWFHzncyJW6FZEWK7SYih6M9EN95PCkry7SBxZ7ZcI/edit?usp=sharing)
