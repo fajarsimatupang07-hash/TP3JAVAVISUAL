@@ -47,3 +47,23 @@ javavisual-tp5-[253303621268]/
                     └── Main.java
                     
 ****************https://docs.google.com/document/d/1EIJS8eMNeiLUt4lro79V67FLvGUWUX4Ye0rOyS_x-Xg/edit?usp=sharing
+
+## TP8 — Character Manager Sprint #3 (GUI & MVC)
+
+### 1. Screenshot MainWindow
+*(![alt text](image-2.png))
+
+### 2. Alur Data (Main → CharacterManager → MainWindow) dalam Konsep MVC
+* **Model (`Character` & `CharacterManager`):** Menyimpan data mentah, daftar karakter, serta logika bisnis seperti perhitungan rata-rata level.
+* **Controller (`Main`):** Menginisialisasi data objek, menyusun manager, serta memicu pembuatan tampilan GUI secara aman menggunakan `SwingUtilities.invokeLater`.
+* **View (`MainWindow`):** Mengambil data secara dinamis dari Model (melalui perantara manager) menggunakan perulangan *loop*, lalu merender komponen visual ke layar pengguna tanpa mengubah data aslinya.
+
+### 3. Daftar Karakter Baru & Alasan Pemilihan Tipe/Level
+* **Arthas (WARRIOR - Level 3):** Dipilih sebagai petarung garis depan dengan HP tinggi.
+* **Jaina (MAGE - Level 4):** Penyihir dengan kapasitas Mana besar dan serangan sihir tinggi.
+* **Thrall (WARRIOR - Level 2):** Karakter pejuang pendukung dengan statistik seimbang.
+* **Sylvanas (ARCHER - Level 5):** Pemanah tingkat lanjut dengan ketangkasan dan attack power tinggi.
+* **Illidan (ASSASSIN - Level 6):** Karakter level tertinggi dengan attack power paling mematikan.
+
+### 4. Link Google Docs Analisis GUI & MVC (Bagian D)
+* [Link Google Docs TP8 Analisis GUI & MVC](https://docs.google.com/document/d/1pAwStmnKpCy0FHq3qnMg_73EXeotQkbfwwg4EJBbzys/edit?usp=sharing)
