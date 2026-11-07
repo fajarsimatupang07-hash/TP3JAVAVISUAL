@@ -11,18 +11,23 @@ public class Character {
     private int defense;
     private int mana;
 
-    // Constructor 1: Nama dan tipe
+    // Constructor 2 parameter
     public Character(String name, CharacterType type) {
         this(name, type, 1, 100, 20, 10);
     }
 
-    // Constructor 2: Tanpa defense
+    // Constructor 3 parameter
+    public Character(String name, CharacterType type, int level) {
+        this(name, type, level, 100, 20, 10);
+    }
+
+    // Constructor 5 parameter
     public Character(String name, CharacterType type,
-                      int level, int hitPoints, int attackPower) {
+                     int level, int hitPoints, int attackPower) {
         this(name, type, level, hitPoints, attackPower, 10);
     }
 
-    // Constructor 3: Lengkap
+    // Constructor 6 parameter
     public Character(String name, CharacterType type,
                      int level, int hitPoints,
                      int attackPower, int defense) {
@@ -73,7 +78,6 @@ public class Character {
         return attackPower;
     }
 
-    // Alias agar getAttack() juga bisa digunakan
     public int getAttack() {
         return attackPower;
     }
@@ -100,15 +104,15 @@ public class Character {
                 "Mana tidak boleh negatif!"
             );
         }
-
         this.mana = mana;
     }
 
-    // Method pendukung
+    // Mengecek apakah karakter masih hidup
     public boolean isAlive() {
-        return this.hitPoints > 0;
+        return hitPoints > 0;
     }
 
+    // Menampilkan informasi karakter
     @Override
     public String toString() {
         return "Character{" +

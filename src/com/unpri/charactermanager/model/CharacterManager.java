@@ -7,19 +7,18 @@ public class CharacterManager {
 
     private ArrayList<Character> characters;
 
-    // Constructor
     public CharacterManager() {
         characters = new ArrayList<>();
     }
 
-    // Menambahkan karakter dan menolak nama duplikat
+    // Menambahkan karakter
     public boolean addCharacter(Character character) {
 
         for (Character c : characters) {
             if (c.getName().equalsIgnoreCase(character.getName())) {
                 System.out.println(
-                    "Karakter " + character.getName() +
-                    " ditolak karena nama sudah digunakan."
+                    "Nama " + character.getName() +
+                    " sudah digunakan!"
                 );
                 return false;
             }
@@ -28,8 +27,7 @@ public class CharacterManager {
         characters.add(character);
 
         System.out.println(
-            "Karakter " + character.getName() +
-            " berhasil ditambahkan."
+            character.getName() + " berhasil ditambahkan."
         );
 
         return true;
@@ -56,7 +54,7 @@ public class CharacterManager {
         return (double) total / characters.size();
     }
 
-    // Mencari karakter berdasarkan tipe
+    // Mencari berdasarkan tipe
     public ArrayList<Character> findByType(CharacterType type) {
 
         ArrayList<Character> result = new ArrayList<>();
@@ -70,7 +68,7 @@ public class CharacterManager {
         return result;
     }
 
-    // Mencari karakter dengan attack tertinggi
+    // Mencari karakter terkuat
     public Character findStrongest() {
 
         if (characters.isEmpty()) {
@@ -80,8 +78,7 @@ public class CharacterManager {
         Character strongest = characters.get(0);
 
         for (Character c : characters) {
-            if (c.getAttackPower() >
-                strongest.getAttackPower()) {
+            if (c.getAttackPower() > strongest.getAttackPower()) {
                 strongest = c;
             }
         }
