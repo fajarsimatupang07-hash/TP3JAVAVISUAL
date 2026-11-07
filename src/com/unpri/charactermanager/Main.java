@@ -1,33 +1,92 @@
+
 package com.unpri.charactermanager;
 
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterType;
+import com.unpri.charactermanager.model.CharacterManager;
+
+import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) {
-        // Membuat 3 karakter awal
-        Character char1 = new Character("Arthas", CharacterType.WARRIOR, 1, 100, 20, 30);
-        Character char2 = new Character("Jaina", CharacterType.MAGE, 1, 80, 25, 100);
-        
-        // Membuat 1 karakter baru untuk pengujian fitur mandiri/mana & isAlive (Bagian B no. 5)
-        Character char3 = new Character("Sylvanas", CharacterType.ARCHER, 2, 90, 22, 60);
 
-        System.out.println("=== DATA KARAKTER AWAL ===");
-        System.out.println(char1);
-        System.out.println(char2);
-        System.out.println(char3);
+        System.out.println("=== PENGUJIAN CHARACTER MANAGER SPRINT #2 ===");
 
-        // Demo Level Up pada char1
-        System.out.println("\n=== DEMO LEVEL UP (Arthas naik ke Level 3) ===");
-        char1.setLevel(3);
-        System.out.println(char1);
+        CharacterManager manager = new CharacterManager();
 
-        // Demo pengecekan isAlive()
-        System.out.println("\n=== DEMO STATUS HIDUP (isAlive) ===");
-        System.out.println(char2.getName() + " masih hidup? " + char2.isAlive());
-        
-        // Simulasi karakter HP 0
-        char2.setHitPoints(0);
-        System.out.println(char2.getName() + " setelah HP 0, masih hidup? " + char2.isAlive());
+        // 1. Pengujian penambahan karakter
+        System.out.println("\n--- PENGUJIAN ADD CHARACTER ---");
+
+        Character c1 = new Character(
+            "Arthas", CharacterType.WARRIOR, 5, 150, 50, 30
+        );
+
+        Character c2 = new Character(
+            "Jaina", CharacterType.MAGE, 4, 90, 65, 15
+        );
+
+        Character c3 = new Character(
+            "Arthas", CharacterType.WARRIOR, 1, 100, 20, 10
+        );
+
+        manager.addCharacter(c1);
+        manager.addCharacter(c2);
+        manager.addCharacter(c3);
+
+        System.out.println(
+            "Total Karakter: " + manager.getTotalCharacters()
+        );
+
+        // 2. Pengujian rata-rata level
+        System.out.println("\n--- MINI CHALLENGE ---");
+
+        System.out.println(
+            "Rata-rata Level: " + manager.getAverageLevel()
+        );
+
+        // 3. Pengujian pencarian berdasarkan tipe
+        ArrayList<Character> mages =
+            manager.findByType(CharacterType.MAGE);
+
+        System.out.println("Karakter bertipe MAGE:");
+
+        for (Character mage : mages) {
+            System.out.println(mage);
+        }
+
+        // 4. Pengujian karakter terkuat
+        System.out.println("\n--- FITUR ANALITIK ---");
+
+        Character strongest = manager.findStrongest();
+
+        if (strongest != null) {
+            System.out.println(
+                "Karakter Terkuat: " + strongest.getName()
+            );
+
+            System.out.println(
+                "Attack Power: " + strongest.getAttackPower()
+            );
+        }
+
+        // 5. Pengujian enkapsulasi
+        System.out.println("\n--- PENGUJIAN ENKAPSULASI ---");
+
+        ArrayList<Character> externalList =
+            manager.getAllCharacters();
+
+        externalList.clear();
+
+        System.out.println(
+            "Total karakter setelah list luar dihapus: "
+            + manager.getTotalCharacters()
+        );
+
+        System.out.println(
+            "Jika jumlah tetap 2, enkapsulasi berhasil."
+        );
+
+        System.out.println("\n=== PENGUJIAN SELESAI ===");
     }
 }
