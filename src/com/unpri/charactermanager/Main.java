@@ -1,30 +1,33 @@
 package com.unpri.charactermanager;
 
 import com.unpri.charactermanager.model.Character;
-import com.unpri.charactermanager.model.CharacterManager;
 import com.unpri.charactermanager.model.CharacterType;
-import com.unpri.charactermanager.view.MainWindow;
-
-import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        CharacterManager manager = new CharacterManager();
+        // Membuat 3 karakter awal
+        Character char1 = new Character("Arthas", CharacterType.WARRIOR, 1, 100, 20, 30);
+        Character char2 = new Character("Jaina", CharacterType.MAGE, 1, 80, 25, 100);
+        
+        // Membuat 1 karakter baru untuk pengujian fitur mandiri/mana & isAlive (Bagian B no. 5)
+        Character char3 = new Character("Sylvanas", CharacterType.ARCHER, 2, 90, 22, 60);
 
-        // Menambahkan minimal 6 karakter dengan variasi role dan level
-        manager.addCharacter(new Character("Arthas", CharacterType.WARRIOR, 6, 150, 30, 40));
-        manager.addCharacter(new Character("Jaina", CharacterType.MAGE, 5, 110, 25, 120));
-        manager.addCharacter(new Character("Thrall", CharacterType.WARRIOR, 1, 90, 15, 30)); // Level 1 (uji setEnabled)
-        manager.addCharacter(new Character("Sylvanas", CharacterType.ARCHER, 5, 130, 35, 70));
-        manager.addCharacter(new Character("Illidan", CharacterType.ASSASSIN, 6, 160, 45, 90));
-        manager.addCharacter(new Character("Uther", CharacterType.WARRIOR, 1, 100, 18, 20)); // Level 1 kedua
+        System.out.println("=== DATA KARAKTER AWAL ===");
+        System.out.println(char1);
+        System.out.println(char2);
+        System.out.println(char3);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                MainWindow window = new MainWindow(manager);
-                window.setVisible(true);
-            }
-        });
+        // Demo Level Up pada char1
+        System.out.println("\n=== DEMO LEVEL UP (Arthas naik ke Level 3) ===");
+        char1.setLevel(3);
+        System.out.println(char1);
+
+        // Demo pengecekan isAlive()
+        System.out.println("\n=== DEMO STATUS HIDUP (isAlive) ===");
+        System.out.println(char2.getName() + " masih hidup? " + char2.isAlive());
+        
+        // Simulasi karakter HP 0
+        char2.setHitPoints(0);
+        System.out.println(char2.getName() + " setelah HP 0, masih hidup? " + char2.isAlive());
     }
 }
