@@ -1,103 +1,147 @@
-# Character Manager — TP3 (Java Visual SIH-6406)
+# Character Manager — Sprint #5
+## Layout, UI Responsif & Analisis MVC
 
-## Deskripsi Singkat
-Aplikasi berbasis Java konsol ini dirancang sebagai fondasi model class untuk manajemen karakter game (Character Manager). Proyek ini menerapkan konsep Object-Oriented Programming (OOP) seperti enkapsulasi, penggunaan constructor overloading, enum, serta validasi atribut secara ketat.
-
-## Screenshot Output Terminal
-[alt text](image.png)
-```bash
-[Contoh Tampilan Output Terminal]
-=== DATA KARAKTER AWAL ===
-Character{name='Arthas', type=WARRIOR, level=1, hitPoints=100, attackPower=20, mana=30, isAlive=true}
-...
-https://docs.google.com/document/d/15tznjK5KhScaTC756uG_VeQPY745pMouZWlfko9QqXY/edit?usp=sharing
-
-
-# Character Manager — TP5 (Java Visual SIH-6406)
-
-## Deskripsi Singkat
-Aplikasi berbasis Java ini merupakan pengembangan Sprint #2 (TP5) untuk **Character Manager**. Pada versi ini, aplikasi dilengkapi dengan manajemen koleksi `List<Character>`, penanganan duplikasi nama karakter, pengecekan objek referensi, pemenuhan prinsip enkapsulasi (*Defensive Copy*), fitur analitik rata-rata level, filter tipe karakter, serta pencarian karakter terkuat.
+**Mata Kuliah:** AP16 Belajar Praktik  
+**Tugas:** TP12  
+**Nama:** [Nama Lengkap]  
+**NIM:** [NIM]  
+**Kelas:** [Kelas]  
+**Program Studi:** Sistem Informasi  
+**Universitas:** Universitas Prima Indonesia (UNPRI)
 
 ---
 
-## Fitur & Analitik Mandiri (Bagian C)
-* **Fitur Mandiri:** `findStrongestCharacter()`
-* **Deskripsi:** Method ini memindai seluruh karakter di dalam daftar dan mengembalikan objek `Character` yang memiliki nilai `attackPower` tertinggi.
-* **Rasional Desain & Enkapsulasi:** Method ini mengembalikan objek karakter terkuat secara opsional tanpa mengekspos list internal `characterList`, sehingga enkapsulasi tetap terjaga dengan aman.
+# 1. Deskripsi Aplikasi
 
----
+Character Manager merupakan aplikasi berbasis Java Swing yang digunakan untuk mengelola dan menampilkan data karakter. Setiap karakter memiliki informasi berupa nama, role, level, Hit Points (HP), dan Attack Power (ATK).
 
-## Screenshot Output Terminal
-*(![alt text](image-1.png))
+Pada Sprint #5, aplikasi dikembangkan dengan memperbaiki tata letak antarmuka agar lebih rapi, responsif, dan mudah digunakan ketika ukuran jendela diperbesar maupun diperkecil.
 
----
+Pengembangan ini menggunakan beberapa Layout Manager, yaitu BorderLayout, GridLayout, BoxLayout, dan FlowLayout.
 
-## Struktur Folder Project
+# 2. Struktur Layout Aplikasi
+
+Aplikasi menggunakan BorderLayout sebagai layout utama dengan empat wilayah:
+
+| Wilayah | Komponen | Fungsi |
+|---|---|---|
+| NORTH | Header | Menampilkan judul aplikasi dan jumlah karakter |
+| CENTER | JScrollPane | Menampilkan daftar kartu karakter |
+| EAST | Legenda Role | Menampilkan warna berdasarkan jenis karakter |
+| SOUTH | Status Bar | Menampilkan jumlah karakter dan versi aplikasi |
+
+## Wireframe Aplikasi
+
+Berikut rancangan struktur tampilan Character Manager:
+
 ```text
-javavisual-tp5-[253303621268]/
-└── CharacterManager/
-    └── src/
-        └── com/
-            └── unpri/
-                └── charactermanager/
-                    ├── model/
-                    │   ├── Character.java
-                    │   ├── CharacterManager.java
-                    │   └── CharacterType.java
-                    └── Main.java
-                    
-****************https://docs.google.com/document/d/1EIJS8eMNeiLUt4lro79V67FLvGUWUX4Ye0rOyS_x-Xg/edit?usp=sharing
++------------------------------------------------------+
+|                    NORTH (HEADER)                    |
+|  Character Manager                 8 Karakter        |
++------------------------------------------------------+
+|                              |                       |
+|          CENTER              |        EAST           |
+|                              |                       |
+|   +----------------------+   |   LEGENDA ROLE        |
+|   | Karakter 1           |   |                       |
+|   +----------------------+   |   [WARRIOR]            |
+|   | Karakter 2           |   |   [MAGE]               |
+|   +----------------------+   |   [ARCHER]             |
+|   | Karakter 3           |   |                       |
+|   +----------------------+   |                       |
+|                              |                       |
++------------------------------------------------------+
+|                    SOUTH (STATUS)                    |
+|  Total: 8 karakter | Siap                    v0.5    |
++------------------------------------------------------+
+```
 
-## TP8 — Character Manager Sprint #3 (GUI & MVC)
+## Panel Bersarang (Nested Panel)
 
-### 1. Screenshot MainWindow
-*(![alt text](image-2.png))
+Aplikasi menggunakan konsep panel bersarang atau Nested Panel, yaitu panel yang ditempatkan di dalam panel lainnya. BorderLayout digunakan sebagai kerangka utama aplikasi, sedangkan setiap bagian memiliki panel dengan layout masing-masing. Daftar karakter menggunakan GridLayout agar kartu tersusun secara vertikal dengan jarak yang konsisten. Legenda menggunakan BoxLayout Y_AXIS agar setiap role tersusun dari atas ke bawah. Penggunaan panel bersarang membuat tampilan lebih terorganisasi dan mudah dikembangkan.
 
-### 2. Alur Data (Main → CharacterManager → MainWindow) dalam Konsep MVC
-* **Model (`Character` & `CharacterManager`):** Menyimpan data mentah, daftar karakter, serta logika bisnis seperti perhitungan rata-rata level.
-* **Controller (`Main`):** Menginisialisasi data objek, menyusun manager, serta memicu pembuatan tampilan GUI secara aman menggunakan `SwingUtilities.invokeLater`.
-* **View (`MainWindow`):** Mengambil data secara dinamis dari Model (melalui perantara manager) menggunakan perulangan *loop*, lalu merender komponen visual ke layar pengguna tanpa mengubah data aslinya.
+# 3. Layout Tambahan
 
-### 3. Daftar Karakter Baru & Alasan Pemilihan Tipe/Level
-* **Arthas (WARRIOR - Level 3):** Dipilih sebagai petarung garis depan dengan HP tinggi.
-* **Jaina (MAGE - Level 4):** Penyihir dengan kapasitas Mana besar dan serangan sihir tinggi.
-* **Thrall (WARRIOR - Level 2):** Karakter pejuang pendukung dengan statistik seimbang.
-* **Sylvanas (ARCHER - Level 5):** Pemanah tingkat lanjut dengan ketangkasan dan attack power tinggi.
-* **Illidan (ASSASSIN - Level 6):** Karakter level tertinggi dengan attack power paling mematikan.
+Pada pengembangan Sprint #5, direncanakan penambahan panel statistik menggunakan GridLayout 2×2.
 
-### 4. Link Google Docs Analisis GUI & MVC (Bagian D)
-* [Link Google Docs TP8 Analisis GUI & MVC](https://docs.google.com/document/d/1pAwStmnKpCy0FHq3qnMg_73EXeotQkbfwwg4EJBbzys/edit?usp=sharing)
+Panel statistik menampilkan empat informasi:
+1. Total karakter.
+2. Rata-rata level karakter.
+3. Jumlah role.
+4. Karakter dengan Attack Power tertinggi.
 
-## TP10 — Character Manager Sprint #4 (Theming & Properti Komponen)
+### Alasan Memilih GridLayout
 
-### 1. Screenshot Tampilan Aplikasi
-*(Tambahkan dua screenshot di bawah ini untuk membuktikan perubahan tampilan)*
+GridLayout dipilih karena dapat membagi panel menjadi empat bagian dengan ukuran yang sama. Dengan susunan 2 baris dan 2 kolom, informasi statistik dapat ditampilkan secara teratur dan mudah dibaca.
 
-* **Sebelum (v0.3 - TP8):**  
-  ![Screenshot Sebelum (v0.3)]("C:\Users\TUF GAMING\OneDrive\Gambar\Screenshots\image-1.png.png")
+### Layout yang Tidak Dipilih
 
-* **Sesudah (v0.4 - TP10):**  
-  ![Screenshot Sesudah (v0.4)]("C:\Users\TUF GAMING\OneDrive\Gambar\Screenshots\image-2.png.png")
+FlowLayout tidak dipilih untuk panel statistik karena susunan komponennya mengikuti aliran horizontal dan dapat berpindah baris ketika ruang tidak mencukupi. Sementara itu, GridLayout memberikan susunan yang lebih konsisten untuk empat informasi statistik.
+
+# 4. Pengamatan Responsive Layout
+
+Pengujian dilakukan dengan mengubah ukuran jendela aplikasi untuk melihat bagaimana komponen menyesuaikan ruang yang tersedia.
+
+| No. | Kondisi Jendela | Prediksi | Hasil Pengamatan |
+|---|---|---|---|
+| 1 | Ukuran awal | Semua komponen terlihat rapi | [Isi setelah pengujian] |
+| 2 | Jendela diperbesar | Area daftar karakter melebar dan ruang menyesuaikan | [Isi setelah pengujian] |
+| 3 | Jendela diperkecil | Daftar karakter menggunakan scrollbar ketika diperlukan | [Isi setelah pengujian] |
+
+## Screenshot Pengujian
+
+### Screenshot 1 — Ukuran Awal
+
+Menampilkan aplikasi dengan ukuran jendela awal setelah dijalankan.
+
+![alt text](image-3.png)
+
+### Screenshot 2 — Jendela Diperbesar
+
+Menampilkan perubahan tata letak ketika ukuran jendela diperbesar.
+
+![alt text](image-5.png)
+
+### Screenshot 3 — Jendela Diperkecil
+
+Menampilkan tampilan aplikasi ketika ukuran jendela diperkecil hingga scrollbar daftar karakter terlihat.
+
+![alt text](image-4.png)
+
+# 5. Penggunaan Layout Manager
+
+### BorderLayout
+
+Digunakan sebagai layout utama JFrame untuk membagi aplikasi menjadi wilayah NORTH, SOUTH, EAST, WEST, dan CENTER.
+
+### GridLayout
+
+Digunakan untuk menyusun kartu karakter dalam satu kolom. GridLayout juga digunakan pada panel statistik dengan susunan 2×2.
+
+### BoxLayout
+
+Digunakan pada panel legenda role dengan arah vertikal menggunakan BoxLayout.Y_AXIS.
+
+### FlowLayout
+
+FlowLayout merupakan layout sederhana yang menyusun komponen secara berurutan. Layout ini dipertimbangkan untuk komponen yang tidak membutuhkan susunan kisi tetap.
+
+# 6. Konsep MVC
+
+Aplikasi Character Manager menerapkan konsep Model-View-Controller (MVC) untuk memisahkan tanggung jawab program.
+
+- **Model:** Mengelola data karakter, seperti Character, CharacterType, dan CharacterManager.
+- **View:** Mengatur tampilan aplikasi, seperti MainWindow dan AppTheme.
+- **Controller:** Menghubungkan tindakan pengguna dengan proses pengelolaan data dan pembaruan tampilan.
+
+Pemisahan ini membuat program lebih terstruktur, mudah diperbaiki, dan dikembangkan tanpa harus mengubah seluruh bagian aplikasi.
+
+# 7. Kesimpulan
+
+Pada Sprint #5, aplikasi Character Manager dikembangkan dengan menerapkan berbagai Layout Manager pada Java Swing. Penggunaan BorderLayout, GridLayout, dan BoxLayout membantu menghasilkan tampilan yang lebih terstruktur. JScrollPane memungkinkan daftar karakter tetap dapat diakses ketika jumlah karakter bertambah. Selain itu, konsep MVC membantu memisahkan pengelolaan data dengan tampilan aplikasi sehingga program lebih mudah dipelihara dan dikembangkan.
 
 ---
 
-### 2. Mengapa Warna Disimpan di `AppTheme` dan Bukan di Class `Character`?
-Pengaturan warna dan aspek visual disimpan di dalam class `AppTheme` (layer View) untuk menerapkan prinsip **Separation of Concerns** dan menjaga arsitektur **MVC**:
-1. **Model Terisolasi:** Class `Character` (Model) bertugas murni mengelola data bisnis (seperti nama, role, level, HP, dan Mana) tanpa perlu tahu bagaimana data tersebut akan digambar di layar.
-2. **Fleksibilitas & Reuse:** Jika aplikasi kelak ingin diubah ke tema lain (misalnya Light Mode / Dark Mode) atau di-porting ke platform lain (seperti Web atau Android), kode di Model tidak perlu diubah sama sekali.
-3. **Mencegah High Coupling:** Menyimpan objek `Color` milik Java Swing di dalam `Character` akan membuat Model terikat erat dengan library GUI Swing.
-
----
-
-### 3. Daftar Properti Tambahan yang Dipilih & Alasannya
-1. **Tooltip (`card.setToolTipText(...)`):**
-   * **Fungsi:** Menampilkan informasi detail berupa statistik *Hit Points* (HP) dan *Attack Power* (ATK) saat kursor mouse diarahkan ke kartu karakter.
-   * **Alasan:** Memberikan informasi tambahan secara interaktif kepada pengguna tanpa memenuhi ruang antarmuka utama.
-2. **Status Non-Aktif (`card.setEnabled(false)`):**
-   * **Fungsi:** Mengunci dan menonaktifkan tampilan kartu karakter yang masih berada di **Level 1** (misalnya karakter baru / pemula).
-   * **Alasan:** Memberikan umpan balik visual bahwa karakter level 1 masih terikons/belum siap digunakan dalam pertarungan.
-
----
-
-### 4. Link Google Docs Analisis Properti & MVC (Bagian D)
-* [Link Google Docs TP10 Analisis Properti & MVC](https://docs.google.com/document/d/1jwWFHzncyJW6FZEWK7SYih6M9EN95PCkry7SBxZ7ZcI/edit?usp=sharing)
+**Character Manager v0.5**  
+Universitas Prima Indonesia (UNPRI)  
+Program Studi Sistem Informasi

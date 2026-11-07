@@ -1,36 +1,85 @@
+
 package com.unpri.charactermanager.view;
 
-import com.unpri.charactermanager.model.CharacterType;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Font;
 
-public class AppTheme {
-    // 3 Warna Utama
-    public static final Color BG_DARK = new Color(30, 30, 30);
-    public static final Color TEXT_LIGHT = new Color(240, 240, 240);
-    public static final Color GOLD_COLOR = new Color(255, 215, 0);
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
-    // 3 Font Utama (Logical Font yang aman)
-    public static final Font FONT_TITLE = new Font("SansSerif", Font.BOLD, 16);
-    public static final Font FONT_REGULAR = new Font("Monospaced", Font.PLAIN, 12);
-    public static final Font FONT_GOLD_BOLD = new Font("Monospaced", Font.BOLD, 13);
+import com.unpri.charactermanager.model.CharacterType;
 
-    // 1 Border Utama
-    public static final Border CARD_BORDER = BorderFactory.createCompoundBorder(
-        BorderFactory.createLineBorder(new Color(100, 100, 100), 1),
-        BorderFactory.createEmptyBorder(5, 8, 5, 8)
-    );
+public final class AppTheme {
 
-    // Method colorFor (Pemetaan Role ke Warna)
+    // PALET WARNA
+    public static final Color BG_MAIN =
+            Color.decode("#12121f");
+
+    public static final Color BG_STATUS =
+            Color.decode("#1e1e2f");
+
+    public static final Color TEXT_MAIN =
+            Color.WHITE;
+
+    public static final Color TEXT_MUTED =
+            Color.decode("#b2bec3");
+
+    public static final Color TEXT_LIGHT =
+            Color.WHITE;
+
+    public static final Color GOLD =
+            Color.decode("#fdcb6e");
+
+    // FONT
+    public static final Font FONT_TITLE =
+            new Font("SansSerif", Font.BOLD, 22);
+
+    public static final Font FONT_BODY =
+            new Font("SansSerif", Font.PLAIN, 14);
+
+    public static final Font FONT_MONO =
+            new Font("Monospaced", Font.PLAIN, 13);
+
+    // BORDER
+    public static final Border CARD_BORDER =
+            BorderFactory.createEmptyBorder(8, 12, 8, 12);
+
+    private AppTheme() {
+    }
+
+    // WARNA BERDASARKAN ROLE
     public static Color colorFor(CharacterType type) {
+
         switch (type) {
-            case WARRIOR: return new Color(180, 50, 50);   // Merah bata
-            case MAGE:    return new Color(50, 100, 180);  // Biru
-            case ARCHER:  return new Color(50, 150, 50);   // Hijau
-            case ASSASSIN:return new Color(120, 50, 150);  // Ungu
-            default:      return new Color(100, 100, 100); // Abu-abu
+            case WARRIOR:
+                return Color.decode("#d63031");
+
+            case MAGE:
+                return Color.decode("#0984e3");
+
+            case ARCHER:
+                return Color.decode("#00b894");
+
+            default:
+                return Color.GRAY;
+        }
+    }
+
+    // DESKRIPSI ROLE
+    public static String describe(CharacterType type) {
+
+        switch (type) {
+            case WARRIOR:
+                return "Warrior: jarak dekat, HP tinggi";
+
+            case MAGE:
+                return "Mage: serangan sihir, HP rendah";
+
+            case ARCHER:
+                return "Archer: jarak jauh, seimbang";
+
+            default:
+                return "Role belum terdaftar";
         }
     }
 }
